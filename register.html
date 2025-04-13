@@ -4,27 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create an Account</title>
-  <link rel="stylesheet" href="register.css" />
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
 
-  <!-- Your Firebase config -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
       authDomain: "table-23514.firebaseapp.com",
       projectId: "table-23514",
-      // Add other config values if needed
+      storageBucket: "table-23514.appspot.com",
+      messagingSenderId: "111280711097",
+      appId: "1:111280711097:web:7a802ed2d3b4a0ce5b4268"
     };
 
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
 
-  <!-- Your register logic -->
-  <script src="register.js" defer></script>
+  <script src="register.js" defer type="module"></script>
 </head>
 <body>
   <div class="login-container">
