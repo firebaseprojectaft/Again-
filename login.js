@@ -1,48 +1,23 @@
-const auth = firebase.auth();
+// login.js
+import { auth } from './firebase.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-// REGISTER FORM HANDLING
-const registerForm = document.getElementById('registerForm');
-if (registerForm) {
-  registerForm.addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const userData = {
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value,
-      email: document.getElementById('email').value,
-      fullName: document.getElementById('fullname').value,
-      phone: document.getElementById('phone').value,
-      currency: document.getElementById('currency').value
-    };
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    console.log('Registering user:', userData);
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    const uid = userCred.user.uid;
 
-    // You can now call Firebase Auth to register the user
-    // Example:
-    // auth.createUserWithEmailAndPassword(userData.email, userData.password)
-    // .then((userCredential) => { ... })
-  });
-}
+    // Store UID in localStorage
+    localStorage.setItem("uid", uid);
 
-// LOGIN FORM HANDLING
-const loginForm = document.getElementById('loginForm');
-if (loginForm) {
-  loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    auth.signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        const uid = userCredential.user.uid;
-        console.log("Logged in as:", uid);
-
-        localStorage.setItem("uid", uid);
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => {
-        alert("Login failed: " + error.message);
-      });
-  });
-}
+    // Redirect to dashboard
+    window.location.href = "dashboard.html";
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+});
