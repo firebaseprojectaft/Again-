@@ -29,7 +29,7 @@ onSnapshot(userRef, (docSnap) => {
 
     const symbol = getCurrencySymbol(data.currency);
 
-    document.getElementById("welcomeUser").textContent = data.username || "User";
+    document.getElementById("welcomeUser").textContent = data.username || data.fullName || "User";
     document.getElementById("balanceAmount").textContent = symbol + (data.balance || 0);
     document.getElementById("bonusAmount").textContent = symbol + (data.bonus || 0);
     document.getElementById("withdrawalAmount").textContent = symbol + (data.withdrawal || 0);
