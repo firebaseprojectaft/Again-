@@ -2,35 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login to Dashboard</title>
-  <link rel="stylesheet" href="login.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+  <!-- Firebase SDKs (loaded through external modules) -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="login.js"></script>
 
-  <!-- Firebase Config -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
-      authDomain: "table-23514.firebaseapp.com",
-      projectId: "table-23514",
-      // Add other config values as needed
-    };
-
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
-  <!-- Your login script -->
-  <script src="login.js" defer></script>
+  <!-- Optional CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="login-container">
+  <div class="container">
     <h2>Login to Dashboard</h2>
     <form id="loginForm">
-      <label for="email">Email</label>
+      <label for="email">Email</label> <!-- changed from username -->
       <input type="email" id="email" placeholder="Enter your email" required />
 
       <label for="password">Password</label>
@@ -38,7 +24,7 @@
 
       <button type="submit">Login</button>
     </form>
-    <p class="register-link">Don't have an account? <a href="register.html">Register</a></p>
+    <p class="link-text">Don't have an account? <a href="register.html">Register</a></p>
   </div>
 </body>
 </html>
