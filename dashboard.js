@@ -25,6 +25,8 @@ const userRef = doc(db, "users", uid);
 onSnapshot(userRef, (docSnap) => {
   if (docSnap.exists()) {
     const data = docSnap.data();
+    console.log("User Data:", data); // <-- Check what is being retrieved
+
     const symbol = getCurrencySymbol(data.currency);
 
     document.getElementById("welcomeUser").textContent = data.username || "User";
