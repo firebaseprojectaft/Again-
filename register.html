@@ -2,32 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create an Account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+
+  <!-- Firebase SDK & Registration Logic (use modules) -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="register.js"></script>
+
+  <!-- Optional CSS -->
   <link rel="stylesheet" href="style.css" />
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
-      authDomain: "table-23514.firebaseapp.com",
-      projectId: "table-23514",
-      storageBucket: "table-23514.appspot.com",
-      messagingSenderId: "111280711097",
-      appId: "1:111280711097:web:7a802ed2d3b4a0ce5b4268"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
-  <script src="register.js" defer type="module"></script>
 </head>
 <body>
-  <div class="login-container">
+  <div class="container">
     <h2>Create an Account</h2>
     <form id="registerForm">
       <label for="username">Username</label>
@@ -47,16 +33,16 @@
 
       <label for="currency">Preferred Currency</label>
       <select id="currency" required>
-        <option value="$">USD ($)</option>
-        <option value="€">EUR (€)</option>
-        <option value="A$">AUD (A$)</option>
-        <option value="£">GBP (£)</option>
-        <option value="¥">JPY (¥)</option>
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="AUD">AUD ($)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="JPY">JPY (¥)</option>
       </select>
 
       <button type="submit">Register</button>
     </form>
-    <p class="register-link">Already have an account? <a href="login.html">Login</a></p>
+    <p class="link-text">Already have an account? <a href="index.html">Login</a></p>
   </div>
 </body>
 </html>
