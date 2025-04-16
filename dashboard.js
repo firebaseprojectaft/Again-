@@ -1,47 +1,68 @@
-const auth = firebase.auth();
-const db = firebase.firestore();
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-function logout() {
-  auth.signOut().then(() => {
-    localStorage.removeItem("uid");
-    window.location.href = "index.html";
-  });
+const firebaseConfig = {
+  apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
+  authDomain: "table-23514.firebaseapp.com",
+  projectId: "table-23514"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Check UID from localStorage
+const uid = localStorage.getItem("uid");
+if (!uid) {
+  window.location.href = "index.html";
 }
 
-window.addEventListener("DOMContentLoaded", async () => {
-  const uid = localStorage.getItem("uid");
-  if (!uid) {
-    window.location.href = "index.html";
-    return;
-  }
+// Reference user document
+const userRef = doc(db, "users", uid);
 
-  const userRef = db.collection("users").doc(uid);
-
-  // Real-time listener
-  userRef.onSnapshot(doc => {
-    if (!doc.exists) return;
-    const data = doc.data();
-    const symbol = data.currencySymbol || "$";
+// Listen for real-time updates
+onSnapshot(userRef, (docSnap) => {
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    const symbol = getCurrencySymbol(data.currency);
 
     document.getElementById("welcomeUser").textContent = data.username || "User";
-
     document.getElementById("balanceAmount").textContent = symbol + (data.balance || 0);
     document.getElementById("bonusAmount").textContent = symbol + (data.bonus || 0);
     document.getElementById("withdrawalAmount").textContent = symbol + (data.withdrawal || 0);
 
-    const now = new Date().toLocaleString();
-    document.getElementById("balanceUpdated").textContent = "Last updated: " + now;
-    document.getElementById("bonusUpdated").textContent = "Last updated: " + now;
-    document.getElementById("withdrawalUpdated").textContent = "Last updated: " + now;
+    const timestamp = new Date().toLocaleString();
+    document.getElementById("balanceUpdated").textContent = `Last updated: ${timestamp}`;
+    document.getElementById("bonusUpdated").textContent = `Last updated: ${timestamp}`;
+    document.getElementById("withdrawalUpdated").textContent = `Last updated: ${timestamp}`;
 
     const activityLog = document.getElementById("activityLog");
-    activityLog.innerHTML = "";
-    if (Array.isArray(data.recentActivity)) {
-      data.recentActivity.slice().reverse().forEach(entry => {
-        const li = document.createElement("li");
-        li.textContent = entry;
-        activityLog.appendChild(li);
-      });
-    }
+    const activityList = data.recentActivity || [];
+    activityLog.innerHTML = activityList.length
+      ? activityList.slice().reverse().map(item => `<li>${item}</li>`).join("")
+      : `<li>No recent activity to display</li>`;
+  } else {
+    console.log("No such document!");
+  }
+});
+
+// Logout function
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth).then(() => {
+    localStorage.removeItem("uid");
+    window.location.href = "index.html";
   });
 });
+
+// Currency symbol helper
+function getCurrencySymbol(currencyCode) {
+  const symbols = {
+    USD: "$",
+    EUR: "€",
+    GBP: "£",
+    AUD: "$",
+    JPY: "¥"
+  };
+  return symbols[currencyCode] || "$";
+}
