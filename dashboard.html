@@ -5,24 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Financial Dashboard</title>
   <link rel="stylesheet" href="dashboard.css"/>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-
-  <!-- Firebase Config -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
-      authDomain: "table-23514.firebaseapp.com",
-      projectId: "table-23514"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
-  <!-- JavaScript Logic -->
-  <script defer src="dashboard.js"></script>
+  <script type="module" src="dashboard.js" defer></script>
 </head>
 <body>
   <div class="dashboard">
@@ -31,7 +14,7 @@
       <div class="user-info">
         <span>Welcome,</span>
         <strong id="welcomeUser">...</strong>
-        <button class="logout" onclick="logout()">Logout</button>
+        <button class="logout" id="logoutBtn">Logout</button>
       </div>
     </header>
 
