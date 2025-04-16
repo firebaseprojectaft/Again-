@@ -4,14 +4,14 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 // Your Firebase config object
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+   const firebaseConfig = {
+      apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
+      authDomain: "table-23514.firebaseapp.com",
+      projectId: "table-23514",
+      storageBucket: "table-23514.appspot.com",
+      messagingSenderId: "111280711097",
+      appId: "1:111280711097:web:7a802ed2d3b4a0ce5b4268"
+    };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
