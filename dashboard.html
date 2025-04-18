@@ -1,64 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Financial Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css"/>
-  <script type="module" src="dashboard.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Account</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: white;
+    }
+
+    header {
+      background-color: #000;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .welcome-section {
+      background-color: #091dfc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .welcome-section img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .balance-card {
+      background-color: #222;
+      margin: -2rem 1rem 1rem;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .balance-card .amount {
+      font-size: 1.3rem;
+      color: orange;
+      margin-bottom: 0.3rem;
+    }
+
+    .balance-card .usd {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .balance-card .label {
+      margin: 0.5rem 0 1rem;
+      color: #aaa;
+    }
+
+    .balance-card .buttons {
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+    }
+
+    .balance-card button {
+      background-color: #1a2cff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer; /* Add cursor for better UX */
+    }
+
+    .balance-card button i {
+      color: white;
+    }
+
+    .welcome-message {
+      background-color: #222;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .welcome-message i {
+      color: #1a2cff;
+      margin-right: 8px;
+    }
+
+    .services {
+      margin: 1rem;
+    }
+
+    .services h3 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .service-item {
+      background-color: #222;
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: white;
+      cursor: pointer; /* Add cursor for better UX */
+    }
+
+    .service-item i {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 0.3rem;
+      color: #1a2cff; /* Match the blue icon color from image */
+    }
+  </style>
 </head>
 <body>
-  <div class="dashboard">
-    <header class="dashboard-header">
-      <div class="logo">Financial <br> Dashboard</div>
-      <div class="user-info">
-        <span>Welcome,</span>
-        <strong id="welcomeUser">...</strong>
-        <button class="logout" id="logoutBtn">Logout</button>
-      </div>
-    </header>
 
-    <main class="content">
-      <h2>Your Financial Overview</h2>
-      <p class="subtitle">View your current financial status</p>
+  <header>Account Overview </header>
 
-      <div class="card">
-        <div class="card-header">
-          <span>Balance</span>
-          <span class="badge available">Available</span>
-        </div>
-        <p class="amount" id="balanceAmount">$0</p>
-        <p class="updated" id="balanceUpdated">Loading...</p>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span>Bonus</span>
-          <span class="badge earned">Earned</span>
-        </div>
-        <p class="amount" id="bonusAmount">$0</p>
-        <p class="updated" id="bonusUpdated">Loading...</p>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span>Completed Withdrawals</span>
-          <span class="badge processed">Processed</span>
-        </div>
-        <p class="amount" id="withdrawalAmount">$0</p>
-        <p class="updated" id="withdrawalUpdated">Loading...</p>
-      </div>
-
-      <div class="card activity">
-        <h3>Recent Activity</h3>
-        <ul id="activityLog"></ul>
-        <p class="note">Activity updates automatically after admin actions</p>
-      </div>
-    </main>
-
-    <footer class="footer">
-      © 2025 Financial Dashboard. All rights reserved.
-    </footer>
+  <div class="welcome-section">
+    <img src="https://i.postimg.cc/g2F6zV66/IMG-9529.png?v=026" alt="Tether Logo">
+    <h2 id="welcome-username">Welcome</h2>
   </div>
+
+  <div class="balance-card">
+    <div class="amount"> <span id="balance-amount" class="usd">≈ $0.00</span></div>
+    <div class="label">Balance</div>
+    <div class="buttons">
+      <button id="deposit-button"><i class="fas fa-wallet"></i>Deposit</button>
+      <button id="withdraw-button"><i class="fas fa-arrow-up"></i>Withdraw</button>
+      <button id="transfer-button"><i class="fas fa-exchange-alt"></i>Transfer</button>
+    </div>
+  </div>
+
+  <div class="welcome-message">
+    <i class="fas fa-bell"></i>Welcome to cryptocurrency Finance
+  </div>
+
+  <div class="services">
+    <h3>Other Services</h3>
+    <div class="service-grid">
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-briefcase"></i>Financing</div>
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-shield-alt"></i>Security</div>
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-comment-dots"></i>Message</div>
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-headset"></i>Contact</div>
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-question-circle"></i>Questions</div>
+      <div class="service-item" onclick="openJivoChat()"><i class="fas fa-wallet"></i>Wallet</div>
+      <div class="service-item" onclick="window.location.href = 'login.html';"><i class="fas fa-power-off"></i>Logout</div>
+    </div>
+  </div>
+
+  <script>
+    // Function to open the JivoChat widget
+    function openJivoChat() {
+      jivo_api.open();
+    }
+
+    // Add event listeners to the Deposit, Withdraw, and Transfer buttons
+    document.getElementById('deposit-button').addEventListener('click', openJivoChat);
+    document.getElementById('withdraw-button').addEventListener('click', openJivoChat);
+    document.getElementById('transfer-button').addEventListener('click', openJivoChat);
+
+    // --- Firebase Integration (Conceptual - Replace with your actual Firebase code) ---
+
+    // Assume you have initialized Firebase and have access to your database
+
+    // Function to update the displayed balance
+    function updateBalance(balance, currency) {
+      const balanceAmountElement = document.getElementById('balance-amount');
+      balanceAmountElement.textContent = `≈ $${balance.toFixed(2)}`; // Assuming USD as base for the ≈ conversion
+      // You might want to handle different currencies more explicitly here
+    }
+
+    // Function to automatically update the displayed currency (based on user selection)
+    function updateCurrency(currency) {
+      const balanceAmountElement = document.getElementById('balance-amount');
+      // Update the currency symbol or text based on the 'currency' value
+      // For example:
+      if (currency === 'EUR') {
+        balanceAmountElement.textContent = `≈ €${parseFloat(balanceAmountElement.textContent.split('$')[1]).toFixed(2)}`;
+      } else if (currency === 'GBP') {
+        balanceAmountElement.textContent = `≈ £${parseFloat(balanceAmountElement.textContent.split('$')[1]).toFixed(2)}`;
+      } else {
+        balanceAmountElement.classList.add('usd'); // Ensure USD class is present if it's USD
+      }
+    }
+
+    // Function to fetch and display user data (including username, balance, and currency)
+    function fetchUserData() {
+      // Replace 'users' and 'userId' with your actual Firebase collection and user ID
+      const userId = 'YOUR_USER_ID'; // You'll need to get the actual user ID
+      const userRef = firebase.firestore().collection('users').doc(userId);
+
+      userRef.get().then((doc) => {
+        if (doc.exists) {
+          const userData = doc.data();
+          const username = userData.username || 'User'; // Default to 'User' if no username
+          const balance = userData.balance || 0;
+          const currency = userData.currency || 'USD'; // Default to 'USD' if no currency
+
+          document.getElementById('welcome-username').textContent = `Welcome, ${username}`;
+          updateBalance(balance, currency);
+          updateCurrency(currency);
+        } else {
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    }
+
+    // Call fetchUserData when the page loads (you'll need to ensure Firebase is initialized before this)
+    // document.addEventListener('DOMContentLoaded', fetchUserData);
+
+    // --- Manual Balance Update (Example - You'll need to integrate this with your UI) ---
+
+    function manuallyUpdateBalance(newBalance) {
+      const userId = 'YOUR_USER_ID'; // Get the current user's ID
+      const userRef = firebase.firestore().collection('users').doc(userId);
+
+      userRef.update({ balance: newBalance })
+        .then(() => {
+          console.log("Balance updated successfully!");
+          // Optionally, refresh the displayed balance
+          fetchUserData();
+        })
+        .catch((error) => {
+          console.error("Error updating balance:", error);
+        });
+    }
+
+    // --- Automatic Currency Update (Example - Triggered when user selects a currency) ---
+
+    function updateUserCurrency(selectedCurrency) {
+      const userId = 'YOUR_USER_ID'; // Get the current user's ID
+      const userRef = firebase.firestore().collection('users').doc(userId);
+
+      userRef.update({ currency: selectedCurrency })
+        .then(() => {
+          console.log("Currency updated successfully!");
+          // Optionally, refresh the displayed currency
+          fetchUserData();
+        })
+        .catch((error) => {
+          console.error("Error updating currency:", error);
+        });
+    }
+
+    // Add onclick handlers to the "Other Services" buttons to open JivoChat
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach(item => {
+      if (!item.querySelector('.fa-power-off')) { // Exclude the logout button
+        item.addEventListener('click', openJivoChat);
+      }
+    });
+  </script>
+
+  <script>
+      (function(){
+          var widget_id = 'yL45oTwtSI';
+          var d=document;var w=window;function l(){
+          var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id
+            ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}
+          if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}
+          else{w.addEventListener('load',l,false);}}})();
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyBoRjw2YOVHIq1uUYJuc-fhEbiP9ykfweI",
+  authDomain: "table-23514.firebaseapp.com",
+  databaseURL: "https://table-23514-default-rtdb.firebaseio.com",
+  projectId: "table-23514",
+  storageBucket: "table-23514.appspot.com",
+  messagingSenderId: "111280711097",
+  appId: "1:111280711097:web:7a802ed2d3b4a0ce5b4268",
+  measurementId: "G-QBD0T8BQ7G"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
 </body>
 </html>
